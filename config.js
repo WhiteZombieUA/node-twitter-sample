@@ -3,7 +3,7 @@
  */
 
 // Include the handlebars templating library
-var handlebars = require('express3-handlebars'),
+var jade = require('jade'),
     express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
@@ -17,14 +17,14 @@ var handlebars = require('express3-handlebars'),
 module.exports = function(app){
 
     // Register and configure the handlebars templating engine
-    app.engine('html', handlebars({
-        defaultLayout: 'main',
-        extname: ".html",
-        layoutsDir: __dirname + '/views/layouts'
-    }));
+//    app.engine('html', handlebars({
+//        defaultLayout: 'main',
+//        extname: ".html",
+//        layoutsDir: __dirname + '/views/layouts'
+//    }));
 
-    // Set .html as the default template extension 
-    app.set('view engine', 'html');
+    // Set .jade as the default template extension
+    app.set('view engine', 'jade');
 
     // Tell express where it can find the templates
     app.set('views', __dirname + '/views');

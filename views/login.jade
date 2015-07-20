@@ -1,0 +1,45 @@
+extends layouts/main.jade
+block body
+    .container
+        header
+            h1 Clo
+                span tter
+        section
+            #container_demo
+                a#toregister.hiddenanchor
+                a#tologin.hiddenanchor
+                #wrapper
+                    #login.animate.form
+                        form#signinForm(action="/login" method="post" autocomplete="on")
+                            h1 Log in
+                            p
+                                label.uname(for="username") Your email
+                                input#username(name="usermail" required="required" type="text" placeholder="mymail@mail.com")
+                            p
+                                label.youpasswd(for="password") Your password
+                                input#password(name="userpassword" required="required" type="password" placeholder="eg. X8df!90EO")
+                            p.login.button
+                                input(type="submit" value="Login")
+                            p.change_link
+                                | Not a member yet ?
+                                a.to_register(href="#toregister") Join us
+                    #register.animate.form
+                        form#signupForm(action="/signup" method="post" autocomplete="on")
+                            h1 Sign up
+                            p
+                                label.username(for="usernamesignup" data-icon="@") Your username
+                                input#usernamesignup(name="usernamesignup" required="required" type="text" placeholder="mysuperusername690")
+                            p
+                                label.youmail(for="emailsignup") Your email
+                                input#emailsignup(name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com")
+                            p
+                                label.youpasswd(for="passwordsignup") Your password
+                                input#passwordsignup(name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO")
+                            p
+                                label.youpasswd(for="passwordsignup_confirm") Please confirm your password
+                                input#passwordsignup_confirm(name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO")
+                            p.signin.button
+                                input(type="submit" value="Sign up")
+                            p.change_link
+                                | Already a member ?
+                                a.to_register(href="#tologin") Go and log in

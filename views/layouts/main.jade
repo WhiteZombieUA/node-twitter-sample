@@ -1,0 +1,35 @@
+doctype html
+html
+    head(lang="en")
+        meta(charset="UTF-8")
+        title Clotter
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+        script(type="text/javascript" src="scripts/scripts.js")
+        link(rel="stylesheet" type="text/css" href="css/demo.css")
+        link(rel="stylesheet" type="text/css" href="css/style.css")
+        link(rel="stylesheet" type="text/css" href="css/animate-custom.css")
+    body
+        .row
+            .col-sm-2
+            .col-sm-8
+                if username
+                    nav.navbar.navbar-inverse(role="navigation")
+                        .container-fluid
+                            .navbar-header
+                                a.navbar-brand(href="/me")= username
+                            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                                ul.nav.navbar-nav
+                                    li
+                                        a(href="/wall") Wall
+                                    li
+                                        a(href="/signout") Sign out
+                                form.navbar-form.navbar-right(role="search" action="/search" method="post")
+                                    .form-group
+                                        input.form-control(type="text" name="search_username" placeholder="Search")
+                                    button.btn.btn-primary(type="submit") Search
+
+                block body

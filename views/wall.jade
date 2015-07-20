@@ -1,0 +1,46 @@
+extends layouts/main.jade
+block body
+    .col-sm-2
+    .col-sm-8
+        .row
+            .col-sm-12
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title News
+                    .panel-body
+                        form#commentForm(action= "/post" method= "post")
+                            input(type="hidden" name="uName" value="username")
+                            .col-sm-10
+                                textarea.form-control(name="uComment" maxlength="140")
+                            .col-sm-2
+                                .row
+                                    .col-sm-12
+                                        button.btn.btn-lg.btn-primary(type="submit" value="Post") Post
+        .panel.panel-default
+            .panel-heading
+                h3.panel-title Posts
+            .panel-body
+                if posts
+                    each post in posts
+                        .row
+                            .col-sm-2
+                                .thumbnail
+                                    img(src="http://www.micro-solve.net/images/clients/user.png")
+                            .col-sm-10
+                                p
+                                    strong
+                                        a(href='/@' + post.username) @#{post.username}
+                                p.
+                                    #{post.comment}
+                                ul.nav.nav-pills
+                                    li
+                                        a(href="") Reply
+                                    li
+                                        a(href="") Share
+                        hr
+                else
+                    .row
+                        .col-sm-2
+                        .col-sm-10
+                            p
+                                | No posts

@@ -1,0 +1,62 @@
+extends layouts/main.jade
+block body
+    .row
+        .col-sm-4
+            .panel-footer
+                .row
+                    .col-sm-12
+                        .thumbnail
+                            img(src="http://www.micro-solve.net/images/clients/user.png")
+                .row
+                    .col-sm-4.col-md-offset-3
+                        h5
+                            b @#{profile_user.username}
+                hr
+                .row
+                    .col-sm-6
+                        span
+                            label Posts: #{dbposts}
+                    .col-sm-6
+                        span
+                            label Followers: #{dbfollowers}
+                .row
+                    .col-sm-4.col-md-offset-3
+                        unless me
+                            if follow
+                                form(action= "/unsubscribe" method= "post")
+                                    input(type="hidden" name="profile_username" value="profile_user.username")
+                                    input(type="hidden" name="current_username" value="current_user.username")
+                                    button.btn.btn-danger(type="submit" value="Post") Unsubscribe
+                            else
+                                form(action= "/subscribe" method= "post")
+                                    input(type="hidden" name="profile_username" value="profile_user.username")
+                                    input(type="hidden" name="current_username" value="current_user.username")
+                                    button.btn.btn-info(type="submit" value="Post") Subscribe
+        .col-sm-8
+            .panel.panel-default
+                .panel-heading
+                    h3.panel-title Posts
+                .panel-body
+                    if posts
+                        each post in posts
+                            .row
+                                .col-sm-2
+                                    .thumbnail
+                                        img(src="http://www.micro-solve.net/images/clients/user.png")
+                                .col-sm-10
+                                    p
+                                        strong @#{post.username}
+                                    p.
+                                        #{post.comment}
+                                    ul.nav.nav-pills
+                                        li
+                                            a(href="") Reply
+                                        li
+                                            a(href="") Share
+                            hr
+                    else
+                        .row
+                            .col-sm-2
+                            .col-sm-10
+                                p
+                                    | No posts
