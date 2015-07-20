@@ -39,7 +39,7 @@ block body
                 .panel-heading
                     h3.panel-title Posts
                 .panel-body
-                    if posts
+                    if posts && posts.length
                         each post in posts
                             .row
                                 .col-sm-2
