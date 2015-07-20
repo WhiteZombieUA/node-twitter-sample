@@ -1,6 +1,4 @@
 {"username":"I_love_CLOTHER","regdate":{"$$date":1437142348251},"email":"I_love_CLOTHER@gmail.com","password":"I_love_CLOTHER","posts":2,"i_follow":[],"me_follow":["WhiteZombie"],"_id":"ATES4suUFnHevdx0"}
-{"username":"WhiteZombie","regdate":{"$$date":1437047619137},"email":"inetwz@gmail.com","password":"e7d809b4","posts":8,"i_follow":["qwerty","I_love_CLOTHER"],"me_follow":[],"_id":"QN85rBww58BAvTIA"}
+{"username":"WhiteZombie","regdate":{"$$date":1437047619137},"email":"inetwz@gmail.com","password":"e7d809b4","posts":10,"i_follow":["qwerty","I_love_CLOTHER"],"me_follow":[],"_id":"QN85rBww58BAvTIA"}
 {"username":"qwerty","regdate":{"$$date":1437060549955},"email":"qwerty@gmail.com","password":"qwerty","posts":2,"i_follow":[],"me_follow":["WhiteZombie"],"_id":"rwdyuGNhPA4meUCC"}
 {"$$indexCreated":{"fieldName":"name","unique":false,"sparse":false}}
-{"username":"WhiteZombie","regdate":{"$$date":1437047619137},"email":"inetwz@gmail.com","password":"e7d809b4","posts":9,"i_follow":["qwerty","I_love_CLOTHER"],"me_follow":[],"_id":"QN85rBww58BAvTIA"}
-{"username":"WhiteZombie","regdate":{"$$date":1437047619137},"email":"inetwz@gmail.com","password":"e7d809b4","posts":10,"i_follow":["qwerty","I_love_CLOTHER"],"me_follow":[],"_id":"QN85rBww58BAvTIA"}

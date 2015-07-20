@@ -15,20 +15,6 @@ module.exports = function(app){
         res.render('login');
     });
 
-    app.param('username', function(req, res, next, username) {
-        // try to get the user details from the User model and attach it to the request object
-        users.find({username: username}, function(err, user) {
-            if (err) {
-                next(err);
-            } else if (user) {
-                req.user = user[0];
-                next();
-            } else {
-                next(new Error('Failed to load user profile'));
-            }
-        });
-    });
-
     app.post('/signup', function(req, res) {
         users.insert( {
             username: req.body.usernamesignup,
@@ -54,7 +40,6 @@ module.exports = function(app){
     });
 
     app.get('/me', function(req, res) {
-
         comments.find({username: req.user.username}, function(err, this_user_posts) {
             this_user_posts.sort(function (d1, d2) {
                 return d2.date - d1.date;
@@ -80,6 +65,20 @@ module.exports = function(app){
         users.update({username: req.body.profile_username}, {$pull: {me_follow: req.body.current_username}}, function() {});
         users.update({username: req.body.current_username}, {$pull: {i_follow: req.body.profile_username}}, function() {});
         res.redirect('/@' + req.body.profile_username);
+    });
+
+    app.post('/search', function(req, res) {
+        users.find({username: req.body.search_username}, function(err, user_profile) {
+            next(err, user_profile[0] || null);
+        });
+
+        function next(err, user_profile) {
+            if (user_profile == null) {
+                res.end("User not found");
+            } else {
+                res.redirect('/@' + user_profile.username);
+            }
+        }
     });
 
     app.post('/post', function(req, res) {
@@ -115,8 +114,6 @@ module.exports = function(app){
                 })
             },
 
-
-
             this_user_posts: function(next) {
                 comments.find({username: req.params.id}, function(err, this_user_posts) {
                     this_user_posts && this_user_posts.sort(function (d1, d2) {
@@ -134,7 +131,7 @@ module.exports = function(app){
                 is_follower = profile_user.me_follow.some(function (_) { return _ === req.user.username });
 
             res.render('profile', {
-                current_user: req.user,
+                username: req.user.username,
                 profile_user: profile_user,
                 dbposts: profile_user.posts,
                 dbfollowers: profile_user.me_follow.length,

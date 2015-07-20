@@ -1,4 +1,6 @@
+{"date":{"$$date":1437145990373},"username":"WhiteZombie","comment":"ho ho ho","_id":"0aLiqAz0K5KTfMBP"}
 {"date":{"$$date":1437049613786},"username":"WhiteZombie","comment":"My first post!","_id":"4jcM1teAPpCbYidH"}
+{"date":{"$$date":1437146000998},"username":"WhiteZombie","comment":"la la la","_id":"58YmHe0IBBIv4Wf1"}
 {"date":{"$$date":1437142367732},"username":"I_love_CLOTHER","comment":"I_love_CLOTHER","_id":"593gqBeyD7RzLcXB"}
 {"date":{"$$date":1437141192045},"username":"WhiteZombie","comment":"Holly shit!!!!!","_id":"9Yt9rh12ReA6Z7d9"}
 {"date":{"$$date":1437058831213},"username":"WhiteZombie","comment":"1234567890","_id":"PJ9Icy5fzMjmiq1T"}
@@ -11,5 +13,3 @@
 {"date":{"$$date":1437143010255},"username":"WhiteZombie","comment":"post wall page","_id":"sa75IDMLaddeGnha"}
 {"date":{"$$date":1437122813184},"username":"qwerty","comment":"second qwerty","_id":"soni2WegxWW8YFww"}
 {"$$indexCreated":{"fieldName":"username","unique":false,"sparse":false}}
-{"date":{"$$date":1437145990373},"username":"WhiteZombie","comment":"ho ho ho","_id":"0aLiqAz0K5KTfMBP"}
-{"date":{"$$date":1437146000998},"username":"WhiteZombie","comment":"la la la","_id":"58YmHe0IBBIv4Wf1"}

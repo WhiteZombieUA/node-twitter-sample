@@ -73,5 +73,4 @@ module.exports = function(app){
             done(err, users[0]);
         });
     });
-
 };
