@@ -46,7 +46,7 @@ $(document).ready(function(){
                 str += '<p>This email is already used</p>';
                 triger += 1;
             }
-            if (frog_first != frog_last || frog_first == 0 || frog_last == email.length) {
+            if (frog_first != frog_last || frog_first == 0 || (frog_last + 1) == email.length) {
                 str += '<p>Please enter a valid e-mail</p>';
                 triger += 1;
             }
@@ -98,7 +98,3 @@ $(document).ready(function(){
         }
     });
 });
-
-//    #emailsignup                    emailsignup
-//    #passwordsignup                 passwordsignup
-//    #passwordsignup_confirm         passwordsignup_confirm
