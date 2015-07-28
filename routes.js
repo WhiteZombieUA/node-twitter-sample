@@ -10,7 +10,6 @@ var db = require('./database'),
 
 module.exports = function(app){
 
-    // Homepage
     app.get('/', function(req, res){
         res.render('login');
     });
@@ -26,6 +25,18 @@ module.exports = function(app){
             me_follow:[]
         });
         res.end('Registration was successful');
+    });
+
+    app.post('/validate-username', function(req, res) {
+        users.find({username: req.body.usernamesignup}, function(err, is_username) {
+            res.json(is_username[0] ? true : false);
+        });
+    });
+
+    app.post('/validate-email', function(req, res) {
+        users.find({email: req.body.emailsignup}, function(err, is_email) {
+            res.json(is_email[0] ? true : false);
+        });
     });
 
     app.post('/login',
