@@ -1,0 +1,49 @@
+extends layouts/main.jade
+block body
+    .row
+        .col-sm-10.col-sm-offset-1
+            .panel.panel-default
+                .panel-heading
+                    h3.panel-title Change avatar
+                .panel-body
+                    .row
+                        .col-sm-6.col-sm-offset-3
+                            .thumbnail
+                                img(src="#{avatar}")
+                    .row
+                        form#uploadAvatar(action= "/change-avatar" method= "post" enctype = "multipart/form-data")
+                            .col-sm-5.col-sm-offset-3
+                                input(type="hidden" name="uName" value="#{username}")
+                                input.btn.btn-primary(type="file" name="userAvatar")
+                            .col-sm-1
+                                input.btn.btn-success(type="submit" value="Upload" name="submit")
+    .row
+        .col-sm-10.col-sm-offset-1
+            .panel.panel-default
+                .panel-heading
+                    h3.panel-title Change Name and Surname
+                .panel-body
+                    form#change-fullname(action= "/change-fullname" method= "post")
+                        input(type="hidden" name="fullName" value="#{fullname}")
+                        .col-sm-10
+                            input.form-control(type="text" name="newFullname" value="#{fullname}")
+                        .col-sm-2
+                            .row
+                                .col-sm-12
+                                    button.btn.btn-success(type="submit" value="Post") Confirm
+    .row
+        .col-sm-10.col-sm-offset-1
+            .panel.panel-default
+                .panel-heading
+                    h3.panel-title Change password
+                .panel-body
+                    form#change-password(action= "/change-password" method= "post")
+                        .col-sm-10
+                            input(type="hidden" name="uName" value="#{username}")
+                            label Old Password
+                            input.form-control(type="text" name="oldPassword")
+                            label New Password
+                            input.form-control(type="text" name="newPassword")
+                        .row
+                                .col-sm-2.col-sm-offset-10
+                                    button.btn.btn-success(type="submit" value="Post") Confirm

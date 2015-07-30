@@ -98,3 +98,21 @@ $(document).ready(function(){
         }
     });
 });
+
+$(document).ready(function(){
+    $('#fullnamesignup').blur(function(){
+        var str = '<div class="alert alert-danger" role="alert">',
+            fullname = $('#fullnamesignup').val(),
+            triger = 0;
+        if (fullname.length < 2) {
+            str += '<p>Write your name and surname</p>';
+            triger += 1;
+        }
+        str += '</div>';
+        if (triger > 0) {
+            $($.parseHTML(str)).appendTo($('span#fullname').empty());
+        } else {
+            $('span#fullname').empty();
+        }
+    });
+});

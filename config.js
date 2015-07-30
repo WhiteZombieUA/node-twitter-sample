@@ -8,6 +8,7 @@ var jade = require('jade'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     DB = require('./database'),
+    multer = require('multer'),
     flash = require('connect-flash');
 
 // Require()-ing this module will return a function
@@ -15,13 +16,6 @@ var jade = require('jade'),
 // express application
 
 module.exports = function(app){
-
-    // Register and configure the handlebars templating engine
-//    app.engine('html', handlebars({
-//        defaultLayout: 'main',
-//        extname: ".html",
-//        layoutsDir: __dirname + '/views/layouts'
-//    }));
 
     // Set .jade as the default template extension
     app.set('view engine', 'jade');
@@ -37,9 +31,31 @@ module.exports = function(app){
 
     app.configure(function() {
         app.use(express.static('public'));
+
+        app.use(multer({
+            dest: './public/images/',
+            rename: function (fieldname, filename) {
+                return filename+Date.now();
+            },
+            onFileUploadStart: function (file) {
+                console.log(file.mimetype);
+                if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg'){
+                    return false;
+                } else {
+                    console.log(file.fieldname + ' is starting ...');
+                }
+            },
+            onFileUploadData: function (file, data) {
+                console.log(data.length + ' of ' + file.fieldname + ' arrived');
+            },
+            onFileUploadComplete: function (file) {
+                console.log(file.fieldname + ' uploaded to  ' + file.path);
+            }
+        }));
+
         app.use(express.cookieParser());
-        app.use(express.bodyParser());
         app.use(express.session({ secret: 'keyboard cat' }));
+
         app.use(flash());
         app.use(passport.initialize());
         app.use(passport.session());

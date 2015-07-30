@@ -1,5 +1,4 @@
-{"username":"I_love_CLOTHER","regdate":{"$$date":1437142348251},"email":"I_love_CLOTHER@gmail.com","password":"I_love_CLOTHER","posts":2,"i_follow":[],"me_follow":["WhiteZombie"],"_id":"ATES4suUFnHevdx0"}
-{"username":"WhiteZombie","regdate":{"$$date":1437047619137},"email":"wz@gmail.com","password":"wz","posts":10,"i_follow":["qwerty","I_love_CLOTHER"],"me_follow":[],"_id":"QN85rBww58BAvTIA"}
-{"username":"qwerty","regdate":{"$$date":1437060549955},"email":"qwerty@gmail.com","password":"qwerty","posts":2,"i_follow":[],"me_follow":["WhiteZombie"],"_id":"rwdyuGNhPA4meUCC"}
-{"username":"111","regdate":{"$$date":1437401455193},"email":"111@111.111","password":"111","posts":0,"i_follow":[],"me_follow":[],"_id":"th4mMmC71kNjlxii"}
+{"regdate":{"$$date":1438185068196},"fullname":"qwerty","username":"qwerty","avatar":"/images/bot11438185099590.png","email":"q@q.q","password":"qwerty","posts":1,"i_follow":[],"me_follow":["WhiteZombie"],"_id":"cLtcyEfccnu0gsNJ"}
+{"regdate":{"$$date":1438185123893},"fullname":"Paola Ololo","username":"111","avatar":"/images/bot21438185170631.png","email":"1@1.1","password":"111111","posts":1,"i_follow":[],"me_follow":["WhiteZombie"],"_id":"k8jyMZQnTaG0MR7M"}
+{"regdate":{"$$date":1438184988676},"fullname":"Mykola Shvets","username":"WhiteZombie","avatar":"/images/bot31438185035061.png","email":"wz@wz.wz","password":"87654321","posts":2,"i_follow":["111","qwerty"],"me_follow":[],"_id":"sDyu4e6rHk1lTMfh"}
 {"$$indexCreated":{"fieldName":"name","unique":false,"sparse":false}}

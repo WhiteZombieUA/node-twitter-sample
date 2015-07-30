@@ -16,8 +16,10 @@ module.exports = function(app){
 
     app.post('/signup', function(req, res) {
         users.insert( {
-            username: req.body.usernamesignup,
             regdate: new Date(),
+            fullname: req.body.fullnamesignup,
+            username: req.body.usernamesignup,
+            avatar: '/images/user.png',
             email: req.body.emailsignup,
             password: req.body.passwordsignup,
             posts: 0,
@@ -58,23 +60,24 @@ module.exports = function(app){
 
             res.render('me', {
                 username: req.user.username,
+                fullname: req.user.fullname,
+                avatar: req.user.avatar,
                 dbposts: req.user.posts,
                 dbfollowers: req.user.me_follow.length,
                 posts: this_user_posts
             });
-
         });
     });
 
     app.post('/subscribe', function(req, res){
-        users.update({username: req.body.profile_username}, {$addToSet: {me_follow: req.body.current_username}}, function() {});
-        users.update({username: req.body.current_username}, {$addToSet: {i_follow: req.body.profile_username}}, function() {});
+        users.update({username: req.body.profile_username}, {$addToSet: {me_follow: req.user.username}}, function() {});
+        users.update({username: req.user.username}, {$addToSet: {i_follow: req.body.profile_username}}, function() {});
         res.redirect('/@' + req.body.profile_username);
     });
 
     app.post('/unsubscribe', function(req, res){
-        users.update({username: req.body.profile_username}, {$pull: {me_follow: req.body.current_username}}, function() {});
-        users.update({username: req.body.current_username}, {$pull: {i_follow: req.body.profile_username}}, function() {});
+        users.update({username: req.body.profile_username}, {$pull: {me_follow: req.user.username}}, function() {});
+        users.update({username: req.user.username}, {$pull: {i_follow: req.body.profile_username}}, function() {});
         res.redirect('/@' + req.body.profile_username);
     });
 
@@ -102,19 +105,68 @@ module.exports = function(app){
         res.redirect(req.headers.referer);
     });
 
-    app.get('/wall', function(req, res) {
-        var render_posts = [req.user.username].concat(req.user.i_follow);
-        comments.find({username: {$in: render_posts}}, function(err, user_posts) {
-            user_posts.sort(function (d1, d2) {
-                return d2.date - d1.date;
-            });
-
-            res.render('wall', {
-                username: req.user.username,
-                posts: user_posts
-            });
+    app.get('/edit-profile', function(req, res) {
+        res.render('edit', {
+            username: req.user.username,
+            fullname: req.user.fullname,
+            avatar: req.user.avatar
         });
     });
+
+    app.post('/change-avatar', function(req, res) {
+        var newavatar = '/images/' + req.files.userAvatar.name;
+        users.find({username: req.body.uName}, function(err, this_user) {
+            users.update({avatar: this_user[0].avatar}, {$set:{avatar: newavatar}}, {}, function () {});
+        })
+        res.redirect('/edit-profile');
+    });
+
+    app.post('/change-password', function(req, res) {
+        users.find({username: req.body.uName}, function (err, this_user) {
+            if (this_user[0].password == req.body.oldPassword) {
+                users.update({password: req.body.oldPassword}, {$set:{password: req.body.newPassword}}, {}, function () {});
+                res.end('Password is changed');
+            } else {
+                res.end('Wrong password');
+            }
+        });
+    });
+
+    app.post('/change-fullname', function(req, res) {
+        users.update({fullname: req.body.fullName}, {$set:{fullname: req.body.newFullname}}, {}, function () {});
+        res.redirect('/edit-profile');
+    });
+
+    app.get('/wall', function(req, res) {
+        async.waterfall([
+            function(callback) {
+                var render_posts = [req.user.username].concat(req.user.i_follow);
+                comments.find({username: {$in: render_posts}}, function(err, user_posts) {
+                    user_posts.sort(function (d1, d2) {
+                        return d2.date - d1.date;
+                    });
+                    callback(null, user_posts);
+                });
+            },
+            function(users_posts, callback) {
+                async.each(users_posts, function (user_posts, next) {
+                    var nickname = user_posts.username;
+                    users.find({username: nickname}, function(err, find_user) {
+                        user_posts.avatar = find_user[0].avatar;
+                        next(null);
+                    });
+                }, function(){
+                    callback(null, users_posts);
+                });
+            }
+        ], function(err, data) {
+                res.render('wall', {
+                    username: req.user.username,
+                    posts: data
+                });
+            });
+    });
+
 
     app.get('/@:id', function (req, res) {
 
